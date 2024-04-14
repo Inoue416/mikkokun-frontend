@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "formatter": "pnpm biome format --write ./src",
-    "lintter": "pnpm biome lint ./src"
+    "lintter": "pnpm biome lint ./src",
+    "safe-fixed": "pnpm biome check --apply ./src"
   },
   "dependencies": {
     "next": "14.2.1",
