@@ -1,4 +1,13 @@
-const Header = async () => {
+"use client";
+import Link from "next/link";
+import { useRecoilState } from "recoil";
+import { userDataState } from "@/app/stores/state";
+
+const Header = () => {
+    const [userState, setUserState] = useRecoilState(userDataState);
+    const logoutHandler = () => {
+        setUserState("");
+    }
 	return (
 		<div className="navbar bg-base-300">
 			<div className="navbar-start">
@@ -28,14 +37,18 @@ const Header = async () => {
 						className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
 					>
 						<li>
-							<a>Homepage</a>
+							<Link href={"/"}>Home</Link>
 						</li>
 						<li>
-							<a>Portfolio</a>
+							<Link href={"/"}>ToDo: About</Link>
 						</li>
-						<li>
-							<a>About</a>
-						</li>
+                        {
+                            userState === "" ? (<></>) : (
+                                <li>
+                                    <Link href={"/"} onClick={logoutHandler}>Logout</Link>
+                                </li>
+                            )
+                        }
 					</ul>
 				</div>
 			</div>

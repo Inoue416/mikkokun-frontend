@@ -1,6 +1,4 @@
 "use client";
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import { RecoilRoot } from "recoil";
 import Header from "./components/header/page";
 import Footer from "./components/footer/page";

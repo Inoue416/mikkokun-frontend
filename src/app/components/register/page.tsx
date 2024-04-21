@@ -22,7 +22,7 @@ const RegisterSeatNumberForm = () => {
 		<>
 			<div className="artboard phone-2">
 				<label className="form-control w-full max-w-xm">
-					<div className="label">
+					<div className="label mb-5">
 						<span className="label-text text-2xl">
 							座席番号を入力してください。
 						</span>
