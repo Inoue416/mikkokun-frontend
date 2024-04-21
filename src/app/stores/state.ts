@@ -1,0 +1,14 @@
+import { atom, selector } from "recoil";
+
+export const userDataState = atom({
+	key: "SeatNumber",
+	default: "",
+});
+
+export const getUserDataState = selector({
+	key: "getUserData",
+	get: ({ get }) => {
+		const userData = get(userDataState);
+		return userData;
+	},
+});

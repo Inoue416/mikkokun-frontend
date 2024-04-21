@@ -1,7 +1,26 @@
-const RegisterSeatNumberForm = async () => {
+"use client";
+import { useForm } from "react-hook-form";
+import { useRecoilState } from "recoil";
+import { userDataState } from "@/app/stores/state";
+
+type SeatNumberType = {
+	seatNumber: string;
+};
+
+const RegisterSeatNumberForm = () => {
+	const [_, setUserState] = useRecoilState(userDataState);
+	const {
+		register,
+		handleSubmit,
+		formState: { errors },
+	} = useForm<SeatNumberType>();
+	const submitHandler = handleSubmit((formData: SeatNumberType) => {
+		console.log("FormData: ", formData.seatNumber);
+		setUserState(formData.seatNumber);
+	});
 	return (
 		<>
-			<div className="artboard artboard-horizontal phone-5">
+			<div className="artboard phone-2">
 				<label className="form-control w-full max-w-xm">
 					<div className="label">
 						<span className="label-text text-2xl">
@@ -14,10 +33,14 @@ const RegisterSeatNumberForm = async () => {
 								type="text"
 								placeholder="Seat Number"
 								className="input input-bordered w-full max-w-xs"
+								{...register("seatNumber")}
 							/>
 						</div>
 						<div className="ms-2">
-							<button className="btn btn-outline btn-success">
+							<button
+								className="btn btn-outline btn-success"
+								onClick={submitHandler}
+							>
 								送信
 							</button>
 						</div>
