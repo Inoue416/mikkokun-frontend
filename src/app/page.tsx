@@ -1,11 +1,23 @@
 "use client";
-import { useRecoilValue } from "recoil";
+import { useEffect } from "react";
+import { useRecoilValue, useRecoilState } from "recoil";
 import RegisterSeatNumberForm from "./components/register/page";
 import MikkokuForm from "./components/mikkokuForm/page";
-import { userDataState } from "./stores/state";
+import { userDataState, webSocketState } from "./stores/states";
 
 export default function Home() {
 	const seatNumberData = useRecoilValue(userDataState);
+	// const [socketState, setSocketState] = useRecoilState(webSocketState);
+	// useEffect(() => {
+	// 	const wsUrl =
+	// 		"ws:localhost:8080/ws" +
+	// 		"?seatnumber=" +
+	// 		seatNumberData;
+	//     if(socketState) return;
+	// 	const ws = new WebSocket(wsUrl);
+	// 	setSocketState(ws);
+	// }, []);
+
 	if (seatNumberData === "") {
 		return (
 			<>

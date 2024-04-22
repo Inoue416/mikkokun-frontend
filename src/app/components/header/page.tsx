@@ -1,13 +1,13 @@
 "use client";
 import Link from "next/link";
 import { useRecoilState } from "recoil";
-import { userDataState } from "@/app/stores/state";
+import { userDataState } from "@/app/stores/states";
 
 const Header = () => {
-    const [userState, setUserState] = useRecoilState(userDataState);
-    const logoutHandler = () => {
-        setUserState("");
-    }
+	const [userState, setUserState] = useRecoilState(userDataState);
+	const logoutHandler = () => {
+		setUserState("");
+	};
 	return (
 		<div className="navbar bg-base-300">
 			<div className="navbar-start">
@@ -42,13 +42,15 @@ const Header = () => {
 						<li>
 							<Link href={"/"}>ToDo: About</Link>
 						</li>
-                        {
-                            userState === "" ? (<></>) : (
-                                <li>
-                                    <Link href={"/"} onClick={logoutHandler}>Logout</Link>
-                                </li>
-                            )
-                        }
+						{userState === "" ? (
+							<></>
+						) : (
+							<li>
+								<Link href={"/"} onClick={logoutHandler}>
+									Logout
+								</Link>
+							</li>
+						)}
 					</ul>
 				</div>
 			</div>

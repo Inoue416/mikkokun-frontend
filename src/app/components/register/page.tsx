@@ -1,7 +1,7 @@
 "use client";
 import { useForm } from "react-hook-form";
 import { useRecoilState } from "recoil";
-import { userDataState } from "@/app/stores/state";
+import { userDataState } from "@/app/stores/states";
 
 type SeatNumberType = {
 	seatNumber: string;
