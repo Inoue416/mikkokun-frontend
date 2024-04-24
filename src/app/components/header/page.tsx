@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { useRecoilState } from "recoil";
-import { userDataState } from "@/app/stores/states";
+import { userDataState } from "@/app/stores/websocketStates";
 
 const Header = () => {
 	const [userState, setUserState] = useRecoilState(userDataState);

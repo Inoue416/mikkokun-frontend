@@ -20,6 +20,7 @@ const config: Config = {
     },
   },
   plugins: [daisyui],
+  reactStrictMode: true,
 };
 
 export default config;

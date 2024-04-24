@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useRecoilValue, useRecoilState } from "recoil";
 import RegisterSeatNumberForm from "./components/register/page";
 import MikkokuForm from "./components/mikkokuForm/page";
-import { userDataState, webSocketState } from "./stores/states";
+import { userDataState, webSocketState } from "./stores/websocketStates";
 
 export default function Home() {
 	const seatNumberData = useRecoilValue(userDataState);
