@@ -21,6 +21,7 @@ export const useRecievedMessage = () => {
 		set(limitTimeAtom, data);
 	});
 	socket.onmessage = (msg) => {
+		console.log("--- On Message ---")
 		const content: RecievedMessageType = JSON.parse(msg.data);
 		if (content.type === "alert") {
 			updateLimitTime(TIMELIMIT);
@@ -28,6 +29,8 @@ export const useRecievedMessage = () => {
 			return;
 		}
 		updateMessage(content.message);
+		console.log("Message: ", content.message);
+		console.log("-----------------\n")
 	};
 	return { message, limitTime };
 };

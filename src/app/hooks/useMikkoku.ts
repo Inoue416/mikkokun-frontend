@@ -1,13 +1,16 @@
 import { useCallback, useState } from "react";
 import { websocketAtom } from "../stores/websocketStates";
 import { useRecoilValue } from "recoil";
+import { userDataStateAtom } from "../stores/userState";
 
 export type SendAlertType = {
-	targetseatnumber: string;
+	type: "alert";
+	targetSeatNumber: string;
 };
 
 export type SendTimeUpType = {
-	message: "timeup";
+	type: "timeup";
+	targetSeatNumber: string;
 };
 
 export const useSendAlert = () => {
@@ -16,7 +19,12 @@ export const useSendAlert = () => {
 
 	const send = useCallback(() => {
 		if (input.length === 0) return;
-		socket.send(JSON.stringify({ targetseatnumber: input }));
+		socket.send(
+			JSON.stringify({
+				ActionType: "broadcast", // TODO: test
+				TargetSeatNumber: input,
+			}),
+		);
 		setInput("");
 	}, [input]);
 
@@ -26,11 +34,17 @@ export const useSendAlert = () => {
 export const useSendTimeup = () => {
 	const socket = useRecoilValue(websocketAtom);
 	const [isTimeup, setIsTimeup] = useState<boolean>(false);
-	const send = useCallback(() => {
+	const targetSeatNumber = useRecoilValue(userDataStateAtom);
+	const sendTimeup = useCallback(() => {
 		if (!isTimeup) return;
-		socket.send(JSON.stringify({ message: "timeup" }));
+		socket.send(
+			JSON.stringify({
+				ActionType: "timeup",
+				TargetSeatNumber: targetSeatNumber,
+			}),
+		);
 		setIsTimeup(false);
 	}, [isTimeup]);
 
-	return { isTimeup, setIsTimeup, send };
+	return { isTimeup, setIsTimeup, sendTimeup };
 };

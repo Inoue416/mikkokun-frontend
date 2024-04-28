@@ -1,14 +1,14 @@
 "use client";
 import { useForm } from "react-hook-form";
 import { useRecoilState } from "recoil";
-// import { userDataState } from "@/app/stores/websocketStates";
+import { userDataStateAtom } from "@/app/stores/userState";
 
 type SeatNumberType = {
 	seatNumber: string;
 };
 
 const RegisterSeatNumberForm = () => {
-	const [_, setUserState] = useRecoilState(userDataState);
+	const [_, setUserState] = useRecoilState(userDataStateAtom);
 	const {
 		register,
 		handleSubmit,

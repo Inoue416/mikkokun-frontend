@@ -1,10 +1,10 @@
 "use client";
 import Link from "next/link";
 import { useRecoilState } from "recoil";
-import { userDataState } from "@/app/stores/websocketStates";
+import { userDataStateAtom } from "@/app/stores/userState";
 
 const Header = () => {
-	const [userState, setUserState] = useRecoilState(userDataState);
+	const [userState, setUserState] = useRecoilState(userDataStateAtom);
 	const logoutHandler = () => {
 		setUserState("");
 	};

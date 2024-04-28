@@ -1,8 +1,14 @@
-import { atom, selector } from "recoil";
+import { atom, selector, useRecoilValue } from "recoil";
+import { userDataStateAtom } from "./userState";
+
+const WEBSOCKETURL = "ws://localhost:8080/ws";
 
 const connect = (): Promise<WebSocket> => {
 	return new Promise((resolve, reject) => {
-		const socket = new WebSocket("ws://localhost:80/ws");
+		const userSeatNumber = useRecoilValue(userDataStateAtom);
+		const socket = new WebSocket(
+			WEBSOCKETURL + "?seatnumber=" + userSeatNumber,
+		);
 		socket.onopen = () => {
 			console.log("connected");
 			resolve(socket);
