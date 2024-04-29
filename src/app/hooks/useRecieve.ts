@@ -4,8 +4,8 @@ import { responseAtom, limitTimeAtom } from "../stores/receivedMessageState";
 
 // TODO: 次はWebSocketの独立した管理の作成
 export type RecievedMessageType = {
-	type: string;
-	message: string;
+	ActionType: string;
+	Message: string;
 };
 
 const TIMELIMIT = 300; // [s]
@@ -14,23 +14,25 @@ export const useRecievedMessage = () => {
 	const socket = useRecoilValue(websocketAtom);
 	const message = useRecoilValue(responseAtom);
 	const limitTime = useRecoilValue(limitTimeAtom);
-	const updateMessage = useRecoilCallback(({ set }) => (data: string) => {
+	const updateMessage = useRecoilCallback(({ set }) => (data: string[]) => {
 		set(responseAtom, data);
 	});
 	const updateLimitTime = useRecoilCallback(({ set }) => (data: number) => {
 		set(limitTimeAtom, data);
 	});
 	socket.onmessage = (msg) => {
-		console.log("--- On Message ---")
 		const content: RecievedMessageType = JSON.parse(msg.data);
-		if (content.type === "alert") {
+		if (content.ActionType === "alert") {
 			updateLimitTime(TIMELIMIT);
-			updateMessage(content.message);
-			return;
 		}
-		updateMessage(content.message);
-		console.log("Message: ", content.message);
-		console.log("-----------------\n")
+		// TODO: メッセージの横にタイムスタンプを入れる
+		console.log("Recieved: ", content);
+		const timestamp = new Date();
+		updateMessage(
+			message.concat(
+				content.Message + " : " + timestamp.toLocaleString() + "\n",
+			),
+		);
 	};
 	return { message, limitTime };
 };

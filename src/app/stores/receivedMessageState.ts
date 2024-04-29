@@ -1,8 +1,8 @@
 import { atom } from "recoil";
 
-export const responseAtom = atom<string>({
+export const responseAtom = atom<string[]>({
 	key: "recievedMessage",
-	default: "",
+	default: [],
 });
 
 export const limitTimeAtom = atom<number | undefined>({

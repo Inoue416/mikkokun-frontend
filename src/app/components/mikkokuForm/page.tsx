@@ -16,11 +16,10 @@ const MikkokuForm = () => {
 	if (seatNumberData === "") return redirect("/");
 	const { input, setInput, send } = useSendAlert();
 	const { isTimeup, setIsTimeup, sendTimeup } = useSendTimeup();
-	const { message, limitTime } = useRecievedMessage();
-	console.log("Recieved Message: " + message);
-	console.log("Limit Time: ", limitTime);
+    const { message, limitTime } = useRecievedMessage();
 	return (
 		<>
+			<div></div>
 			<div className="items-center text-3xl mb-3">
 				<p>座席番号：{seatNumberData} さん。ようこそ！</p>
 			</div>

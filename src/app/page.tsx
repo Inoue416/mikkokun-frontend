@@ -3,6 +3,7 @@ import { useRecoilValue, useRecoilState } from "recoil";
 import RegisterSeatNumberForm from "./components/register/page";
 import MikkokuForm from "./components/mikkokuForm/page";
 import { userDataStateAtom } from "./stores/userState";
+import SideLogHistory from "./components/SideLogHistory/page";
 
 export default function Home() {
 	const seatNumberData = useRecoilValue(userDataStateAtom);
@@ -18,9 +19,11 @@ export default function Home() {
 	} else {
 		return (
 			<>
-				<div className="flex flex-col items-center pt-5">
+				{/* <div className="flex flex-col items-center pt-5"> */}
+				<SideLogHistory>
 					<MikkokuForm />
-				</div>
+				</SideLogHistory>
+				{/* </div> */}
 			</>
 		);
 	}

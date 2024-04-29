@@ -2,11 +2,14 @@
 import Link from "next/link";
 import { useRecoilState } from "recoil";
 import { userDataStateAtom } from "@/app/stores/userState";
+import { responseAtom } from "@/app/stores/receivedMessageState";
 
 const Header = () => {
 	const [userState, setUserState] = useRecoilState(userDataStateAtom);
+	const [_, setMessageArray] = useRecoilState(responseAtom);
 	const logoutHandler = () => {
 		setUserState("");
+		setMessageArray([]);
 	};
 	return (
 		<div className="navbar bg-base-300">
