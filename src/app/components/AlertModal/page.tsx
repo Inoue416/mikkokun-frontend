@@ -23,7 +23,7 @@ const AlertModal = () => {
 		updateLimitTime(undefined);
         updateTimerState(undefined);
 	};
-    limitTimeSec === undefined ? undefined : dialogRef.current?.showModal();
+    limitTimeSec === undefined ? dialogRef.current?.close() : dialogRef.current?.showModal();
 	return (
 		<>
 			<dialog id="alert_modal" className="modal" ref={dialogRef}>
