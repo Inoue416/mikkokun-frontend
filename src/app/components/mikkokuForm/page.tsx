@@ -4,6 +4,7 @@ import { useRecoilValue } from "recoil";
 import { useSendAlert } from "@/app/hooks/useMikkoku";
 import { useRecievedMessage } from "@/app/hooks/useRecieve";
 import { userDataStateAtom } from "@/app/stores/userState";
+import { useRef } from "react";
 // import AlertComponent from "../AlertComponent/page";
 
 const MikkokuForm = () => {
@@ -11,7 +12,10 @@ const MikkokuForm = () => {
 	if (seatNumberData === "") return redirect("/");
 	const { input, setInput, send } = useSendAlert();
 	const { messageArray, limitTime, timer } = useRecievedMessage();
-
+    const inputRef = useRef<HTMLInputElement>(null);
+    const submitHandler = () => {
+        send();
+    }
 	return (
 		<>
 			<div></div>
@@ -29,10 +33,12 @@ const MikkokuForm = () => {
 					<div className="flex">
 						<div>
 							<input
+                                ref={inputRef}
 								type="text"
 								placeholder="Target Seat Number"
 								className="input input-bordered w-full max-w-xs"
-								onBlur={(event) => {
+                                value={input}
+								onChange={(event) => {
 									setInput(event.target.value);
 								}}
 							/>
@@ -40,7 +46,7 @@ const MikkokuForm = () => {
 						<div className="ms-2">
 							<button
 								className="btn btn-outline btn-error"
-								onClick={() => send()}
+								onClick={() => submitHandler()}
 							>
 								密告
 							</button>
