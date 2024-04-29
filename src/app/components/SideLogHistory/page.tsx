@@ -1,5 +1,6 @@
 import { useRecoilValue } from "recoil";
 import { responseAtom } from "@/app/stores/receivedMessageState";
+import ChatBubble from "../ChatBubble/page";
 
 type PropsType = {
 	children: React.ReactNode;
@@ -34,7 +35,12 @@ const SideLogHistory = (props: PropsType) => {
 					<ul className="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
 						{/* Sidebar content here */}
 						{messgeArray.map((item) => {
-							return <li>{item}</li>;
+							return (
+								<ChatBubble
+									message={item.message}
+									timestamp={item.timestamp}
+								/>
+							);
 						})}
 					</ul>
 				</div>

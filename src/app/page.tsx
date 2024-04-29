@@ -4,6 +4,7 @@ import RegisterSeatNumberForm from "./components/register/page";
 import MikkokuForm from "./components/mikkokuForm/page";
 import { userDataStateAtom } from "./stores/userState";
 import SideLogHistory from "./components/SideLogHistory/page";
+import AlertModal from "./components/AlertModal/page";
 
 export default function Home() {
 	const seatNumberData = useRecoilValue(userDataStateAtom);
@@ -24,6 +25,7 @@ export default function Home() {
 					<MikkokuForm />
 				</SideLogHistory>
 				{/* </div> */}
+				<AlertModal />
 			</>
 		);
 	}

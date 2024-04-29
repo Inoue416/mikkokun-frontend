@@ -21,7 +21,7 @@ export const useSendAlert = () => {
 		if (input.length === 0) return;
 		socket.send(
 			JSON.stringify({
-				ActionType: "broadcast", // TODO: test
+				ActionType: "alert", // TODO: test
 				TargetSeatNumber: input,
 			}),
 		);
@@ -33,18 +33,15 @@ export const useSendAlert = () => {
 
 export const useSendTimeup = () => {
 	const socket = useRecoilValue(websocketAtom);
-	const [isTimeup, setIsTimeup] = useState<boolean>(false);
 	const targetSeatNumber = useRecoilValue(userDataStateAtom);
 	const sendTimeup = useCallback(() => {
-		if (!isTimeup) return;
 		socket.send(
 			JSON.stringify({
 				ActionType: "timeup",
 				TargetSeatNumber: targetSeatNumber,
 			}),
 		);
-		setIsTimeup(false);
-	}, [isTimeup]);
+	}, []);
 
-	return { isTimeup, setIsTimeup, sendTimeup };
+	return { sendTimeup };
 };

@@ -1,38 +1,38 @@
 import { websocketAtom } from "../stores/websocketStates";
 import { useRecoilCallback, useRecoilValue } from "recoil";
-import { responseAtom, limitTimeAtom } from "../stores/receivedMessageState";
-
-// TODO: 次はWebSocketの独立した管理の作成
-export type RecievedMessageType = {
-	ActionType: string;
-	Message: string;
-};
-
-const TIMELIMIT = 300; // [s]
+import {
+	responseAtom,
+	limitTimeAtom,
+	ResponseAtomType,
+} from "../stores/receivedMessageState";
 
 export const useRecievedMessage = () => {
 	const socket = useRecoilValue(websocketAtom);
-	const message = useRecoilValue(responseAtom);
+	const messageArray = useRecoilValue(responseAtom);
 	const limitTime = useRecoilValue(limitTimeAtom);
-	const updateMessage = useRecoilCallback(({ set }) => (data: string[]) => {
-		set(responseAtom, data);
-	});
+	const updateMessage = useRecoilCallback(
+		({ set }) =>
+			(data: ResponseAtomType[]) => {
+				set(responseAtom, data);
+			},
+	);
 	const updateLimitTime = useRecoilCallback(({ set }) => (data: number) => {
 		set(limitTimeAtom, data);
 	});
 	socket.onmessage = (msg) => {
-		const content: RecievedMessageType = JSON.parse(msg.data);
+		const content = JSON.parse(msg.data);
 		if (content.ActionType === "alert") {
-			updateLimitTime(TIMELIMIT);
+			console.log("Alert!!!!!");
+			updateLimitTime(content.TimeLimitSec);
 		}
 		// TODO: メッセージの横にタイムスタンプを入れる
-		console.log("Recieved: ", content);
 		const timestamp = new Date();
 		updateMessage(
-			message.concat(
-				content.Message + " : " + timestamp.toLocaleString() + "\n",
-			),
+			messageArray.concat({
+				message: content.Message,
+				timestamp: timestamp.toLocaleString(),
+			}),
 		);
 	};
-	return { message, limitTime };
+	return { messageArray, limitTime };
 };

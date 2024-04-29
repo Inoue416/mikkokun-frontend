@@ -1,6 +1,11 @@
 import { atom } from "recoil";
 
-export const responseAtom = atom<string[]>({
+export type ResponseAtomType = {
+	message: string;
+	timestamp: string;
+};
+
+export const responseAtom = atom<ResponseAtomType[]>({
 	key: "recievedMessage",
 	default: [],
 });

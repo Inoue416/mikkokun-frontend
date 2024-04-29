@@ -1,12 +1,7 @@
 "use client";
 import { redirect } from "next/navigation";
 import { useRecoilValue } from "recoil";
-import {
-	useSendAlert,
-	useSendTimeup,
-	SendAlertType,
-	SendTimeUpType,
-} from "@/app/hooks/useMikkoku";
+import { useSendAlert } from "@/app/hooks/useMikkoku";
 import { useRecievedMessage } from "@/app/hooks/useRecieve";
 import { userDataStateAtom } from "@/app/stores/userState";
 // import AlertComponent from "../AlertComponent/page";
@@ -15,8 +10,7 @@ const MikkokuForm = () => {
 	const seatNumberData = useRecoilValue(userDataStateAtom);
 	if (seatNumberData === "") return redirect("/");
 	const { input, setInput, send } = useSendAlert();
-	const { isTimeup, setIsTimeup, sendTimeup } = useSendTimeup();
-    const { message, limitTime } = useRecievedMessage();
+	const { messageArray, limitTime } = useRecievedMessage();
 	return (
 		<>
 			<div></div>
