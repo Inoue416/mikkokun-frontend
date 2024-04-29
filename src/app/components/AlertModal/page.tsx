@@ -38,7 +38,7 @@ const AlertModal = () => {
 							{/* if there is a button in form, it will close the modal */}
 							<Timer />
 							<button
-								className="btn btn-error"
+								className="btn btn-error mt-3"
 								onClick={timerStopHandler}
 							>
 								ストップ！

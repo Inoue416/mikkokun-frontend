@@ -24,7 +24,7 @@ const Timer = () => {
 			if (timer - 1 === 0) {
 				updateTimer(undefined);
 				updateLimitTime(undefined);
-				// sendTimeup();
+				sendTimeup();
 				return () => clearInterval(id);
 			}
 			updateTimer(timer - 1);
