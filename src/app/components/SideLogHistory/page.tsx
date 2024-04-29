@@ -34,9 +34,10 @@ const SideLogHistory = (props: PropsType) => {
 					></label>
 					<ul className="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
 						{/* Sidebar content here */}
-						{messgeArray.map((item) => {
+						{messgeArray.map((item, idx) => {
 							return (
 								<ChatBubble
+                                    key={idx}
 									message={item.message}
 									timestamp={item.timestamp}
 								/>

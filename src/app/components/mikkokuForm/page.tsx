@@ -10,7 +10,8 @@ const MikkokuForm = () => {
 	const seatNumberData = useRecoilValue(userDataStateAtom);
 	if (seatNumberData === "") return redirect("/");
 	const { input, setInput, send } = useSendAlert();
-	const { messageArray, limitTime } = useRecievedMessage();
+	const { messageArray, limitTime, timer } = useRecievedMessage();
+
 	return (
 		<>
 			<div></div>

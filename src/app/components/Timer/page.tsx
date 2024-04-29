@@ -16,22 +16,22 @@ const Timer = () => {
 	);
 	useEffect(() => {
 		if (timer === undefined) {
-			updateTimer(limitTimeSec);
-			return;
+			// updateTimer(limitTimeSec);
+            return;
 		}
 		const id = setInterval(() => {
+            console.log("Interval ...");
 			if (timer - 1 === 0) {
-				updateTimer(undefined);
-				updateLimitTime(undefined);
-				sendTimeup();
+				// updateTimer(undefined);
+				// updateLimitTime(undefined);
+				// sendTimeup();
 				return () => clearInterval(id);
 			}
-			updateTimer(timer === undefined ? 0 : timer - 1);
+			updateTimer(timer - 1);
+            console.log(timer);
 		}, 1000);
 		return () => clearInterval(id);
-	}, []);
-	if (limitTimeSec === undefined) return <></>;
-
+	}, [timer]);
 	return (
 		<>
 			<p className="text-3xl">{timer} [s]</p>

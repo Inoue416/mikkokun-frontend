@@ -1,25 +1,29 @@
 import { useEffect, useRef } from "react";
 import { useRecoilValue, useRecoilCallback } from "recoil";
 import { limitTimeAtom } from "@/app/stores/receivedMessageState";
+import { timerAtom } from "@/app/stores/timerState";
 import Timer from "../Timer/page";
 const AlertModal = () => {
 	const limitTimeSec = useRecoilValue(limitTimeAtom);
+    const timerState = useRecoilValue(timerAtom);
 	const updateLimitTime = useRecoilCallback(
 		({ set }) =>
 			(data: number | undefined) => {
 				set(limitTimeAtom, data);
 			},
 	);
+    const updateTimerState = useRecoilCallback(
+        ({set}) => (data: number | undefined) => {
+            set(timerAtom, data);
+        }
+    );
 	const dialogRef = useRef<HTMLDialogElement>(null);
-	useEffect(() => {
-		dialogRef.current?.showModal();
-	}, []);
-	if (limitTimeSec === undefined) return <></>;
-
 	const timerStopHandler = () => {
 		dialogRef.current?.close();
 		updateLimitTime(undefined);
+        updateTimerState(undefined);
 	};
+    limitTimeSec === undefined ? undefined : dialogRef.current?.showModal();
 	return (
 		<>
 			<dialog id="alert_modal" className="modal" ref={dialogRef}>
