@@ -12,7 +12,7 @@ export const useRecievedMessage = () => {
 	const socket = useRecoilValue(websocketAtom);
 	const messageArray = useRecoilValue(responseAtom);
 	const limitTime = useRecoilValue(limitTimeAtom);
-	const {timer, updateTimer } = useTimer();
+	const { timer, updateTimer } = useTimer();
 	const updateMessage = useRecoilCallback(
 		({ set }) =>
 			(data: ResponseAtomType[]) => {

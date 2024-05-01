@@ -1,5 +1,5 @@
 "use client";
-import { useRecoilValue, useRecoilState } from "recoil";
+import { useRecoilValue } from "recoil";
 import RegisterSeatNumberForm from "./components/register/page";
 import MikkokuForm from "./components/mikkokuForm/page";
 import { userDataStateAtom } from "./stores/userState";
@@ -20,11 +20,9 @@ export default function Home() {
 	} else {
 		return (
 			<>
-				{/* <div className="flex flex-col items-center pt-5"> */}
 				<SideLogHistory>
 					<MikkokuForm />
 				</SideLogHistory>
-				{/* </div> */}
 				<AlertModal />
 			</>
 		);

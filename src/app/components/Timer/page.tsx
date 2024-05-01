@@ -4,7 +4,11 @@ import { useRecoilValue, useRecoilCallback } from "recoil";
 import { limitTimeAtom } from "@/app/stores/receivedMessageState";
 import { useSendTimeup } from "@/app/hooks/useMikkoku";
 
-const Timer = () => {
+type TimerProps = {
+	fontSizeAtr: string;
+};
+
+const Timer = (props: TimerProps) => {
 	const { timer, updateTimer } = useTimer();
 	const limitTimeSec = useRecoilValue(limitTimeAtom);
 	const { sendTimeup } = useSendTimeup();
@@ -17,10 +21,10 @@ const Timer = () => {
 	useEffect(() => {
 		if (timer === undefined) {
 			// updateTimer(limitTimeSec);
-            return;
+			return;
 		}
 		const id = setInterval(() => {
-            console.log("Interval ...");
+			console.log("Interval ...");
 			if (timer - 1 === 0) {
 				updateTimer(undefined);
 				updateLimitTime(undefined);
@@ -28,13 +32,13 @@ const Timer = () => {
 				return () => clearInterval(id);
 			}
 			updateTimer(timer - 1);
-            console.log(timer);
+			console.log(timer);
 		}, 1000);
 		return () => clearInterval(id);
 	}, [timer]);
 	return (
 		<>
-			<p className="text-3xl">{timer} [s]</p>
+			<p className={props.fontSizeAtr}>{timer} [s]</p>
 		</>
 	);
 };

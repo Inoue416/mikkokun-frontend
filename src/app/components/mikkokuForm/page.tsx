@@ -12,10 +12,10 @@ const MikkokuForm = () => {
 	if (seatNumberData === "") return redirect("/");
 	const { input, setInput, send } = useSendAlert();
 	const { messageArray, limitTime, timer } = useRecievedMessage();
-    const inputRef = useRef<HTMLInputElement>(null);
-    const submitHandler = () => {
-        send();
-    }
+	const inputRef = useRef<HTMLInputElement>(null);
+	const submitHandler = () => {
+		send();
+	};
 	return (
 		<>
 			<div></div>
@@ -33,11 +33,11 @@ const MikkokuForm = () => {
 					<div className="flex">
 						<div>
 							<input
-                                ref={inputRef}
+								ref={inputRef}
 								type="text"
 								placeholder="Target Seat Number"
 								className="input input-bordered w-full max-w-xs"
-                                value={input}
+								value={input}
 								onChange={(event) => {
 									setInput(event.target.value);
 								}}

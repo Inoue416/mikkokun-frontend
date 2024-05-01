@@ -37,7 +37,7 @@ const SideLogHistory = (props: PropsType) => {
 						{messgeArray.map((item, idx) => {
 							return (
 								<ChatBubble
-                                    key={idx}
+									key={idx}
 									message={item.message}
 									timestamp={item.timestamp}
 								/>
