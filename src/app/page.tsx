@@ -1,7 +1,7 @@
 "use client";
 import { useRecoilValue } from "recoil";
-import RegisterSeatNumberForm from "./components/register/page";
-import MikkokuForm from "./components/mikkokuForm/page";
+import RegisterSeatNumberForm from "./components/Register/page";
+import MikkokuForm from "./components/MikkokuForm/page";
 import { userDataStateAtom } from "./stores/userState";
 import SideLogHistory from "./components/SideLogHistory/page";
 import AlertModal from "./components/AlertModal/page";

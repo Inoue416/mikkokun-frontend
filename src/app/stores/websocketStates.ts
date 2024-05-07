@@ -3,9 +3,9 @@ import { userDataStateAtom } from "./userState";
 
 const WEBSOCKETURL = "ws://localhost:8080/ws";
 
-const connect = (): Promise<WebSocket> => {
+const connect = (userSeatNumber: string): Promise<WebSocket> => {
 	return new Promise((resolve, reject) => {
-		const userSeatNumber = useRecoilValue(userDataStateAtom);
+    	if (userSeatNumber === "") return;
 		const socket = new WebSocket(
 			WEBSOCKETURL + "?seatnumber=" + userSeatNumber,
 		);
@@ -15,7 +15,7 @@ const connect = (): Promise<WebSocket> => {
 		};
 		socket.onclose = () => {
 			console.log("reconnecting...");
-			connect();
+			connect(userSeatNumber);
 		};
 		socket.onerror = (err) => {
 			console.log("connection error:", err);
@@ -26,8 +26,9 @@ const connect = (): Promise<WebSocket> => {
 
 const connectWebsocketSelector = selector({
 	key: "connectWebsocket",
-	get: async (): Promise<WebSocket> => {
-		return await connect();
+	get: async ({get}): Promise<WebSocket> => {
+		const userSeatNumber = get(userDataStateAtom);
+		return await connect(userSeatNumber);
 	},
 });
 

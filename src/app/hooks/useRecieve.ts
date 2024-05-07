@@ -5,7 +5,6 @@ import {
 	limitTimeAtom,
 	ResponseAtomType,
 } from "../stores/receivedMessageState";
-import { timerAtom } from "../stores/timerState";
 import { useTimer } from "./useTimer";
 
 export const useRecievedMessage = () => {
