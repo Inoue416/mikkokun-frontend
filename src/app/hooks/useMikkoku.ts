@@ -19,7 +19,7 @@ export const useSendAlert = () => {
 
 	const send = useCallback(() => {
 		if (input.length === 0) return;
-		socket.send(
+		socket?.send(
 			JSON.stringify({
 				ActionType: "alert", // TODO: test
 				TargetSeatNumber: input,
@@ -35,7 +35,7 @@ export const useSendTimeup = () => {
 	const socket = useRecoilValue(websocketAtom);
 	const targetSeatNumber = useRecoilValue(userDataStateAtom);
 	const sendTimeup = useCallback(() => {
-		socket.send(
+		socket?.send(
 			JSON.stringify({
 				ActionType: "timeup",
 				TargetSeatNumber: targetSeatNumber,

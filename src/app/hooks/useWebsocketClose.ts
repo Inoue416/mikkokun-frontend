@@ -1,4 +1,4 @@
-import { websocketAtom } from "../stores/websocketStates";
+import { websocketAtom, connectWebsocket } from "../stores/websocketStates";
 import { useRecoilCallback, useRecoilValue } from "recoil";
 import { responseAtom, limitTimeAtom } from "../stores/receivedMessageState";
 import { userDataStateAtom } from "../stores/userState";
@@ -6,6 +6,9 @@ import { userDataStateAtom } from "../stores/userState";
 // TODO: 無限ロード編を解消したい
 export const useLogout = () => {
     const socket = useRecoilValue(websocketAtom);
+    const disposeWebsocket = useRecoilCallback(({ set }) => (data: undefined) => {
+        set(websocketAtom, data);
+    })
 	const updateMessage = useRecoilCallback(({ set }) => (data: []) => {
 		set(responseAtom, data);
 	});
@@ -20,7 +23,7 @@ export const useLogout = () => {
 	});
 	const logoutHandler = () => {
 		try {
-			socket.close();
+			disposeWebsocket(undefined);
 			updateMessage([]);
 			updateLimitTime(undefined);
 			updateUserState("");

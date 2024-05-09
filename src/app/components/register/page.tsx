@@ -1,8 +1,9 @@
 "use client";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useRecoilState } from "recoil";
+import { useRecoilCallback, useRecoilState, useRecoilValue } from "recoil";
 import { userDataStateAtom } from "@/app/stores/userState";
+import { websocketAtom, connectWebsocket } from "@/app/stores/websocketStates";
 
 type SeatNumberType = {
 	seatNumber: string;
@@ -17,6 +18,10 @@ const serverUrl = "http://localhost:8080/";
 
 const RegisterSeatNumberForm = () => {
 	const [_, setUserState] = useRecoilState(userDataStateAtom);
+	const websocket = useRecoilValue(websocketAtom);
+	const updateWebsocket = useRecoilCallback(({ set }) => (data: WebSocket | undefined) => {
+		set(websocketAtom, data);
+	})
 	const [errorMessage, setErrorMessage] = useState<string | undefined>(
 		undefined,
 	);
@@ -25,36 +30,37 @@ const RegisterSeatNumberForm = () => {
 		handleSubmit,
 		formState: { errors },
 	} = useForm<SeatNumberType>();
-	const submitHandler = handleSubmit((formData: SeatNumberType) => {
+	const submitHandler = handleSubmit(async (formData: SeatNumberType) => {
 		console.log("FormData: ", formData.seatNumber);
-		const callFuncName = "checkSameSeatNumber";
-		const fetchUrl =
-			serverUrl + callFuncName + "?seatnumber=" + formData.seatNumber;
-		fetch(fetchUrl, {
-			method: "GET",
-			headers: {
-				"Content-Type": "application/json",
-				// "Access-Control-Allow-Origin": "*",
-			},
-		})
-			.then((response) => {
-				return response.json();
-			})
-			.then((data: ApiResponseType) => {
-				console.log(data);
-				if (!data.isExists) {
-					setErrorMessage(undefined);
-					setUserState(formData.seatNumber);
-					return;
-				}
-				setErrorMessage("その座席番号はすでに使用されています。");
-			})
-			.catch((err) => {
-				console.log(err);
-				setErrorMessage("技術的な問題が発生しました。");
-			});
+		updateWebsocket(await connectWebsocket(formData.seatNumber));
+		// const callFuncName = "checkSameSeatNumber";
+		// const fetchUrl =
+		// 	serverUrl + callFuncName + "?seatnumber=" + formData.seatNumber;
+		// fetch(fetchUrl, {
+		// 	method: "GET",
+		// 	headers: {
+		// 		"Content-Type": "application/json",
+		// 		// "Access-Control-Allow-Origin": "*",
+		// 	},
+		// })
+		// 	.then((response) => {
+		// 		return response.json();
+		// 	})
+		// 	.then((data: ApiResponseType) => {
+		// 		console.log(data);
+		// 		if (!data.isExists) {
+		// 			setErrorMessage(undefined);
+		// 			setUserState(formData.seatNumber);
+		// 			return;
+		// 		}
+		// 		setErrorMessage("その座席番号はすでに使用されています。");
+		// 	})
+		// 	.catch((err) => {
+		// 		console.log(err);
+		// 		setErrorMessage("技術的な問題が発生しました。");
+		// 	});
 
-		// setUserState(formData.seatNumber);
+		setUserState(formData.seatNumber);
 	});
 	return (
 		<>

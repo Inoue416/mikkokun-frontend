@@ -21,22 +21,24 @@ export const useRecievedMessage = () => {
 	const updateLimitTime = useRecoilCallback(({ set }) => (data: number) => {
 		set(limitTimeAtom, data);
 	});
-	socket.onmessage = (msg) => {
-		const content = JSON.parse(msg.data);
-		if (content.ActionType === "alert") {
-			console.log("Alert!!!!!");
-			const timelimit = content.TimeLimitSec as number;
-			console.log("timelimit: ", timelimit);
-			updateLimitTime(timelimit);
-			updateTimer(timelimit);
-		}
-		const timestamp = new Date();
-		updateMessage(
-			messageArray.concat({
-				message: content.Message,
-				timestamp: timestamp.toLocaleString(),
-			}),
-		);
-	};
+	if (socket !== undefined) {
+		socket.onmessage = (msg) => {
+			const content = JSON.parse(msg.data);
+			if (content.ActionType === "alert") {
+				console.log("Alert!!!!!");
+				const timelimit = content.TimeLimitSec as number;
+				console.log("timelimit: ", timelimit);
+				updateLimitTime(timelimit);
+				updateTimer(timelimit);
+			}
+			const timestamp = new Date();
+			updateMessage(
+				messageArray.concat({
+					message: content.Message,
+					timestamp: timestamp.toLocaleString(),
+				}),
+			);
+		};
+	}
 	return { messageArray, limitTime, timer };
 };
