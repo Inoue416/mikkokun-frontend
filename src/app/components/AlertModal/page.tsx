@@ -1,7 +1,7 @@
-import { useEffect, useRef } from "react";
-import { useRecoilValue, useRecoilCallback } from "recoil";
 import { limitTimeAtom } from "@/app/stores/receivedMessageState";
 import { timerAtom } from "@/app/stores/timerState";
+import { useEffect, useRef } from "react";
+import { useRecoilCallback, useRecoilValue } from "recoil";
 import Timer from "../Timer/page";
 const AlertModal = () => {
 	const limitTimeSec = useRecoilValue(limitTimeAtom);

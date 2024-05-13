@@ -1,10 +1,10 @@
 "use client";
 import { useRecoilValue } from "recoil";
-import RegisterSeatNumberForm from "./components/Register/page";
-import MikkokuForm from "./components/MikkokuForm/page";
-import { userDataStateAtom } from "./stores/userState";
-import SideLogHistory from "./components/SideLogHistory/page";
 import AlertModal from "./components/AlertModal/page";
+import MikkokuForm from "./components/MikkokuForm/page";
+import RegisterSeatNumberForm from "./components/Register/page";
+import SideLogHistory from "./components/SideLogHistory/page";
+import { userDataStateAtom } from "./stores/userState";
 
 export default function Home() {
 	const seatNumberData = useRecoilValue(userDataStateAtom);

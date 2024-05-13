@@ -1,9 +1,9 @@
 "use client";
+import { userDataStateAtom } from "@/app/stores/userState";
+import { connectWebsocket, websocketAtom } from "@/app/stores/websocketStates";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useRecoilCallback, useRecoilState, useRecoilValue } from "recoil";
-import { userDataStateAtom } from "@/app/stores/userState";
-import { websocketAtom, connectWebsocket } from "@/app/stores/websocketStates";
 
 type SeatNumberType = {
 	seatNumber: string;
@@ -14,9 +14,12 @@ const serverUrl = "http://localhost:8080/";
 const RegisterSeatNumberForm = () => {
 	const [_, setUserState] = useRecoilState(userDataStateAtom);
 	const websocket = useRecoilValue(websocketAtom);
-	const updateWebsocket = useRecoilCallback(({ set }) => (data: WebSocket | undefined) => {
-		set(websocketAtom, data);
-	})
+	const updateWebsocket = useRecoilCallback(
+		({ set }) =>
+			(data: WebSocket | undefined) => {
+				set(websocketAtom, data);
+			},
+	);
 	const [errorMessage, setErrorMessage] = useState<string | undefined>(
 		undefined,
 	);

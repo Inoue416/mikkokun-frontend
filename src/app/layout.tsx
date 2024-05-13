@@ -1,7 +1,7 @@
 "use client";
 import { RecoilRoot } from "recoil";
-import Header from "./components/Header/page";
 import Footer from "./components/Footer/page";
+import Header from "./components/Header/page";
 import "./globals.css";
 
 export default function RootLayout({

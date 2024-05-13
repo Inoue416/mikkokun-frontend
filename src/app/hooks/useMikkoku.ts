@@ -1,7 +1,7 @@
 import { useCallback, useState } from "react";
-import { websocketAtom } from "../stores/websocketStates";
 import { useRecoilValue } from "recoil";
 import { userDataStateAtom } from "../stores/userState";
+import { websocketAtom } from "../stores/websocketStates";
 
 export type SendAlertType = {
 	type: "alert";
