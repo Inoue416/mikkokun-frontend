@@ -33,7 +33,7 @@ const AlertModal = () => {
 				<div className="modal-box">
 					<h3 className="font-bold text-lg">密告されました！</h3>
 					<p className="py-4">
-						タイマーを止めてると、密告通知を阻止できます。
+						タイマーを止めると、密告通知を阻止できます。
 					</p>
 					<div className="text-center">
 						<Timer fontSizeAtr="text-6xl" />

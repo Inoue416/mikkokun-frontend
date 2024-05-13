@@ -9,11 +9,6 @@ type SeatNumberType = {
 	seatNumber: string;
 };
 
-type ApiResponseType = {
-	isExists: boolean;
-	message: string;
-};
-
 const serverUrl = "http://localhost:8080/";
 
 const RegisterSeatNumberForm = () => {
@@ -33,33 +28,6 @@ const RegisterSeatNumberForm = () => {
 	const submitHandler = handleSubmit(async (formData: SeatNumberType) => {
 		console.log("FormData: ", formData.seatNumber);
 		updateWebsocket(await connectWebsocket(formData.seatNumber));
-		// const callFuncName = "checkSameSeatNumber";
-		// const fetchUrl =
-		// 	serverUrl + callFuncName + "?seatnumber=" + formData.seatNumber;
-		// fetch(fetchUrl, {
-		// 	method: "GET",
-		// 	headers: {
-		// 		"Content-Type": "application/json",
-		// 		// "Access-Control-Allow-Origin": "*",
-		// 	},
-		// })
-		// 	.then((response) => {
-		// 		return response.json();
-		// 	})
-		// 	.then((data: ApiResponseType) => {
-		// 		console.log(data);
-		// 		if (!data.isExists) {
-		// 			setErrorMessage(undefined);
-		// 			setUserState(formData.seatNumber);
-		// 			return;
-		// 		}
-		// 		setErrorMessage("その座席番号はすでに使用されています。");
-		// 	})
-		// 	.catch((err) => {
-		// 		console.log(err);
-		// 		setErrorMessage("技術的な問題が発生しました。");
-		// 	});
-
 		setUserState(formData.seatNumber);
 	});
 	return (
