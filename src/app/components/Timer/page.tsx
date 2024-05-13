@@ -1,8 +1,8 @@
-import { useEffect } from "react";
-import { useTimer } from "@/app/hooks/useTimer";
-import { useRecoilValue, useRecoilCallback } from "recoil";
-import { limitTimeAtom } from "@/app/stores/receivedMessageState";
 import { useSendTimeup } from "@/app/hooks/useMikkoku";
+import { useTimer } from "@/app/hooks/useTimer";
+import { limitTimeAtom } from "@/app/stores/receivedMessageState";
+import { useEffect } from "react";
+import { useRecoilCallback, useRecoilValue } from "recoil";
 
 type TimerProps = {
 	fontSizeAtr: string;

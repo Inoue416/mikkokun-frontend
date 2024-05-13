@@ -1,10 +1,10 @@
-import { websocketAtom } from "../stores/websocketStates";
 import { useRecoilCallback, useRecoilValue } from "recoil";
 import {
-	responseAtom,
+	type ResponseAtomType,
 	limitTimeAtom,
-	ResponseAtomType,
+	responseAtom,
 } from "../stores/receivedMessageState";
+import { websocketAtom } from "../stores/websocketStates";
 import { useTimer } from "./useTimer";
 
 export const useRecievedMessage = () => {

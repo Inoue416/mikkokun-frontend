@@ -1,5 +1,5 @@
-import { useRecoilValue } from "recoil";
 import { responseAtom } from "@/app/stores/receivedMessageState";
+import { useRecoilValue } from "recoil";
 import ChatBubble from "../ChatBubble/page";
 
 type PropsType = {

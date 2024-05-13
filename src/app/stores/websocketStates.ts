@@ -31,9 +31,11 @@ const connect = (userSeatNumber: string): Promise<WebSocket | undefined> => {
 // 		return await connect(userSeatNumber);
 // 	},
 // });
-export const connectWebsocket = async (userSeatNumber: string): Promise<WebSocket | undefined> => {
+export const connectWebsocket = async (
+	userSeatNumber: string,
+): Promise<WebSocket | undefined> => {
 	return await connect(userSeatNumber);
-} 
+};
 
 export const websocketAtom = atom<WebSocket | undefined>({
 	key: "websocket",

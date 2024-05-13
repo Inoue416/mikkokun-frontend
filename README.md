@@ -1,36 +1,52 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 密っこくん (フロントエンド)
+---
+## 概要
+このアプリは居眠りしている人を密告できるアプリです。
+内部のテキストを変えることで様々な場面で使用できます。
 
-## Getting Started
+## 前提
+- バックエンドは以下URLを使用して下さい。(または参考にして下さい。)
+- このアプリは座席番号がある場面で使用できます。
+- 開発途中のため、まだまだ汎用的に使用することはできません。
 
-First, run the development server:
+## 技術スタック
+- TypeScript
+- React
+- Next.js
+- TailwindCSS
+- daisyUI
+- Websocket通信
+- pnpm
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+他の詳細はpackge.jsonを参照して下さい。
+
+
+## コマンド一覧
+```
+pnpm dev         # 本番環境https実行　(未実装)
+
+pnpm dev-http    # local環境でhttpアプリ起動
+
+pnpm fomatter    # fomatter実行
+
+pnpm lintter     # lintter実行
+
+pnpm build       # build
+
+pnpm safe-fixed  # formatter and lintter + α 問題箇所があれば修正
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 実行画面
+### ホーム画面
+<img src="./asset-readme/home.png" alt="home" title="ホーム画面">
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 密告画面
+<img src="./asset-readme/send-alert.png" alt="mikkoku" title="密告画面">
+<img src="./asset-readme/send-alert-log.png" alt="mikkoku-log" title="密告ログ">
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### タイムオーバーによるブロードキャスト
+<img src="./asset-readme/broadcast.png" alt="timeover-broadcast" title="ブロードキャスト">
 
-## Learn More
+## 注意
+- 開発途中のため不完全、バグがある場所が多く存在する可能性が高いです。ご使用際は自己責任でお願いします。
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.

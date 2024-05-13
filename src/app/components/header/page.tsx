@@ -1,16 +1,16 @@
 "use client";
+import { useLogout } from "@/app/hooks/useWebsocketClose";
+import { userDataStateAtom } from "@/app/stores/userState";
 import Link from "next/link";
 import { useState } from "react";
 import { useRecoilValue } from "recoil";
-import { userDataStateAtom } from "@/app/stores/userState";
-import { useLogout } from "@/app/hooks/useWebsocketClose";
 
 // TODO: ロードする形に変える。直書きしたいくない
 type handlerType = () => {};
 const Header = () => {
-    const userState = useRecoilValue(userDataStateAtom);
+	const userState = useRecoilValue(userDataStateAtom);
 	const { logoutHandler } = useLogout();
-    
+
 	return (
 		<div className="navbar bg-base-300">
 			<div className="navbar-start">
